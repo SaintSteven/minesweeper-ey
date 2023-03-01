@@ -1,12 +1,12 @@
 import './App.css'
-import Minefield from './components/Minefield/Minefield'
+import Board from './components/Board/Board'
 
 function App() {
 
   return (
     <>
       <div className="container mx-auto mt-4 flex justify-center">
-        <Minefield />
+        <Board />
       </div>
     </>
   )
