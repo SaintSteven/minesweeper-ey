@@ -1,13 +1,11 @@
+import React from 'react'
 import './App.css'
 import Board from './components/Board/Board'
 
-function App() {
-
+const App = () => {
   return (
     <>
-      <div className="container mx-auto mt-4 flex justify-center">
-        <Board />
-      </div>
+      <Board />
     </>
   )
 }
