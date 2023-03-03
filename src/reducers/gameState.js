@@ -79,7 +79,6 @@ export const CellStates = {
 }
 
 export const reducer = (state, action) => {
-  console.log('holaaa')
   if (action.type !== 'RESTART' && state.state === 'lost') return state
   let newState = { ...state }
   switch (action.type) {
