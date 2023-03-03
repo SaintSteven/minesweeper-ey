@@ -19,13 +19,9 @@ const increaseNearCellsBombs = (state, x, y) => {
   const maxX = Math.min(state.size - 1, x + 1)
   const minY = Math.max(0, y - 1)
   const maxY = Math.min(state.size - 1, y + 1)
-  console.log('Bomba en: ' + x, y)
-  console.log('minx: ' + minX, minY, maxX, maxY)
   for (let i = minX; i <= maxX; i++) {
     for (let j = minY; j <= maxY; j++) {
-      /* if (!board[i][j].isBomb) */
       state.board[i][j].nearBombs = state.board[i][j].nearBombs + 1
-      console.log('Bombas: ' + state.board[i][j].nearBombs)
     }
   }
 }
@@ -35,14 +31,11 @@ const discoveringSafePlaces = (state, x, y) => {
   if (state.board[x][y].state !== CellStates.HIDDEN) return
   state.board[x][y].state = CellStates.DISCOVERED
   if (state.board[x][y].nearBombs !== 0) return
-  discoveringSafePlaces(state, x - 1, y)
-  discoveringSafePlaces(state, x + 1, y)
-  discoveringSafePlaces(state, x, y - 1)
-  discoveringSafePlaces(state, x, y + 1)
-  discoveringSafePlaces(state, x - 1, y - 1)
-  discoveringSafePlaces(state, x + 1, y + 1)
-  discoveringSafePlaces(state, x + 1, y - 1)
-  discoveringSafePlaces(state, x - 1, y + 1)
+  for (let _x = x - 1; _x <= x + 1; _x++) {
+    for (let _y = y - 1; _y <= y + 1; _y++) {
+      discoveringSafePlaces(state, _x, _y)
+    }
+  }
 }
 
 const generateBombs = (state) => {
@@ -79,6 +72,7 @@ export const CellStates = {
 }
 
 export const reducer = (state, action) => {
+  if (action.type !== 'RESTART' && state.state === 'lost') return state
   let newState = { ...state }
   switch (action.type) {
     case 'DISCOVER': {
@@ -86,7 +80,6 @@ export const reducer = (state, action) => {
       discoveringSafePlaces(state, x, y)
       newState.board[x][y] = { ...state.board[x][y], state: CellStates.DISCOVERED }
       checkWinConditions(newState)
-      // TODO DESCUBRIR OTROS LUGARES SIN BOMBAS ( 0 )
       break
     }
     case 'FLAG': {
@@ -98,16 +91,27 @@ export const reducer = (state, action) => {
       newState = createInitialGameState(newState.size)
       break
     }
+    case 'UNFLAG': {
+      const { x, y } = action.payload
+      newState.board[x][y] = { ...state.board[x][y], state: CellStates.HIDDEN }
+      break
+    }
   }
   return newState
 }
 
+const discoverBoard = (gameState) => {
+  gameState.board.flat().forEach(cell => {
+    if (cell.isBomb) cell.state = CellStates.DISCOVERED
+  })
+}
+
 const checkWinConditions = (gameState) => {
-  // recorrer array. Si una cell tiene Discovered and bomb se pierde.
   gameState.state = 'win'
   gameState.board.flat().forEach(cell => {
     if (cell.state === CellStates.DISCOVERED && cell.isBomb) {
       gameState.state = 'lost'
+      discoverBoard(gameState)
     } else if (gameState.state !== 'lost' && cell.state === CellStates.HIDDEN && !cell.isBomb) {
       gameState.state = 'playing'
     }

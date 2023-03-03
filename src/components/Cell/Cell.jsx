@@ -1,4 +1,5 @@
 import React from 'react'
+import CellContent from '../CellContent/CellContent'
 import { CellStates } from '../../reducers/gameState'
 import PropTypes from 'prop-types'
 
@@ -14,12 +15,19 @@ export const Cell = ({ cellState, dispatch }) => {
   console.log(cellState)
   const handleAction = e => {
     e.preventDefault()
-    if (e.type === 'click') dispatch({ type: 'DISCOVER', payload: { x: cellState.x, y: cellState.y } })
-    if (e.type === 'contextmenu') dispatch({ type: 'FLAG', payload: { x: cellState.x, y: cellState.y } })
+    if (e.type === 'click' && cellState.state === CellStates.HIDDEN) dispatch({ type: 'DISCOVER', payload: { x: cellState.x, y: cellState.y } })
+    if (e.type === 'contextmenu') {
+      if (cellState.state === CellStates.HIDDEN) {
+        dispatch({ type: 'FLAG', payload: { x: cellState.x, y: cellState.y } })
+      } else if (cellState.state === CellStates.FLAGGED) {
+        dispatch({ type: 'UNFLAG', payload: { x: cellState.x, y: cellState.y } })
+      }
+    }
   }
+
   return (
-    <div className={`${color} h-8 w-8 items-center justify-center border border-gray-500`} onContextMenu={handleAction} onClick={e => handleAction(e)}>
-      {cellState.state !== CellStates.DISCOVERED ? '' : cellState.isBomb ? '💣' : cellState.nearBombs}
+    <div className={`${color} h-8 w-8 items-center grid place-content-center border border-gray-500`} onContextMenu={handleAction} onClick={e => handleAction(e)}>
+      <CellContent cellState={cellState} />
     </div>
   )
 }
