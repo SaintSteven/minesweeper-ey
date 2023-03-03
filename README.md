@@ -28,7 +28,7 @@ And that's all!
 
 ## About
 
-This is a project created with [Vite](https://vitejs.dev/). I tried it for the first time and it is insanely faster than ``create-react-app``. On the other hand, it is not that robust when the compilation fail and we need the error log.
+This is a project created with [Vite](https://vitejs.dev/). I tried it for the first time and is insanely faster than ``create-react-app``. On the other hand, it is not that robust when the compilation fail and we need the error log.
 
 This game was developed using [React](https://reactjs.org/) and [Tailwind](https://tailwindcss.com/) to code fast.
 
