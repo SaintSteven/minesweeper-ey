@@ -39,17 +39,23 @@ const discoveringSafePlaces = (state, x, y) => {
 }
 
 const generateBombs = (state) => {
+  const bombsMap = []
   let bombCount = 0
   while (bombCount < 10) {
     const x = Math.floor(Math.random() * 10)
     const y = Math.floor(Math.random() * 10)
-    console.log(x, y)
-    console.log('debugiando: ' + state.board[x][y])
-    if (state.board[x][y].isBomb) continue
-    state.board[x][y].isBomb = true
-    increaseNearCellsBombs(state, x, y)
+    if (bombsMap.some((bomb) => bomb.x === x && bomb.y === y)) continue
+    bombsMap.push({ x, y })
     bombCount++
   }
+  return bombsMap
+}
+
+const setBombs = (state, bombsMap) => {
+  bombsMap.forEach(bomb => {
+    state.board[bomb.x][bomb.y].isBomb = true
+    increaseNearCellsBombs(state, bomb.x, bomb.y)
+  })
 }
 
 const createInitialGameState = (size) => {
@@ -60,7 +66,8 @@ const createInitialGameState = (size) => {
     }
   }
   const state = { ...initialGameState, board, size }
-  generateBombs(state)
+  const bombsMap = generateBombs()
+  setBombs(state, bombsMap)
   return state
 }
 
