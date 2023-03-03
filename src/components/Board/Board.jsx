@@ -11,7 +11,7 @@ const Board = () => {
   return (
     <>
       <div className="">
-        <div>
+        <div className="booeenas">
           <h1>Estado del juego: {gameState.state}</h1>
           <RestartGameButton dispatch={dispatch} />
         </div>
@@ -24,7 +24,6 @@ const Board = () => {
           </div>
         </div>
       </div>
-
     </>
   )
 }
