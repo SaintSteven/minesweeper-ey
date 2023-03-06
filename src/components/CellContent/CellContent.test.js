@@ -15,16 +15,16 @@ describe('CellContent', () => {
 
   it('renders a bomb when cell state is discovered and contains a bomb', () => {
     const { getByText } = render(<CellContent cellState={{ state: CellStates.DISCOVERED, isBomb: true }} />)
-    expect(getByText('💣')).toBeInTheDocument
+    expect(getByText('💣')).toBeInTheDocument()
   })
 
   it('renders a flag when cell state is flagged', () => {
     const { getByText } = render(<CellContent cellState={{ state: CellStates.FLAGGED }} />)
-    expect(getByText('🏴‍☠️')).toBeInTheDocument
+    expect(getByText('🏴‍☠️')).toBeInTheDocument()
   })
 
   it('renders a number when cell state is discovered and nearBombs is greater than 0', () => {
     const { getByText } = render(<CellContent cellState={{ state: CellStates.DISCOVERED, nearBombs: 1 }} />)
-    expect(getByText('1')).toBeInTheDocument
+    expect(getByText('1')).toBeInTheDocument()
   })
 })
