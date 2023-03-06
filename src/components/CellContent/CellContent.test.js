@@ -6,6 +6,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import CellContent from './CellContent'
 import { CellStates } from '../../reducers/gameState'
+import '@testing-library/jest-dom'
 
 describe('CellContent', () => {
   it('renders nothing when cell state is hidden', () => {
