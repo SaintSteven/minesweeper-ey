@@ -1,12 +1,12 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
-    'jest/ global': true,
+    es2021: true
   },
   extends: [
     'plugin:react/recommended',
-    'standard'
+    'standard',
+    'plugin:react/recommended'
   ],
   overrides: [
   ],
@@ -32,5 +32,9 @@ module.exports = {
       'error',
       'single'
     ]
+  },
+  globals: {
+    describe: 'readonly',
+    it: 'readonly'
   }
 }

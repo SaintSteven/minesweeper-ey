@@ -4,7 +4,7 @@
 
 import React from 'react'
 import RestartGameButton from './RestartGameButton'
-import { render } from '@testing-library/react';
+import { render } from '@testing-library/react'
 
 it('should mount', async () => {
   render(
