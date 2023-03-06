@@ -1,6 +1,6 @@
 # Minesweeper for "EY Front Challenge" 🏴‍☠️
 
-This is a project I made to get hired by EY. I hope it works 💣
+This is a project I made to enter the EY team. Thank you for review my work :)
 
 ## Installation
 
@@ -15,7 +15,7 @@ git clone https://github.com/SaintSteven/minesweeper-ey
 npm install
 ```
 
-## Usage
+## To play!
 
 Inside the directory, run this to play minesweeper in your browser.
 
@@ -25,6 +25,26 @@ npm run dev
 Then, in your browser, go to  [http://localhost:5173/](http://localhost:5173/)
 
 And that's all!
+
+## Usage
+
+🚿 LINT. If everything is OK, you are going to see 'Clean Code!' in your terminal
+
+```bash
+npm run lint
+```
+
+🐶 TEST.
+
+```bash
+npm run lint
+```
+
+🐱 TEST COVERAGE. Run the command below, then search inside your repo and open in your browser coverage/lcov-report/index.html
+
+```bash
+npm run test-coverage
+```
 
 ## About
 
