@@ -11,3 +11,9 @@ it('should mount', async () => {
     <RestartGameButton dispatch={jest.fn()} />
   )
 })
+
+it('should mount', async () => {
+  render(
+    <RestartGameButton dispatch={jest.fn()} />
+  )
+})

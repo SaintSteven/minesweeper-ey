@@ -6,7 +6,6 @@ import RestartGameButton from '../RestartGameButton/RestartGameButton'
 const Board = () => {
   const size = 10
   const [gameState, dispatch] = useGameReducer(size)
-  console.log(gameState.board)
 
   return (
     <>

@@ -11,8 +11,7 @@ export const Cell = ({ cellState, dispatch }) => {
   if (cellState.state === CellStates.FLAGGED) {
     color = 'bg-red-200'
   }
-  // if (cellState.state != CellStates.HIDDEN)
-  console.log(cellState)
+
   const handleAction = e => {
     e.preventDefault()
     if (e.type === 'click' && cellState.state === CellStates.HIDDEN) dispatch({ type: 'DISCOVER', payload: { x: cellState.x, y: cellState.y } })
