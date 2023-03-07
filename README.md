@@ -1,6 +1,6 @@
 # Minesweeper for "EY Front Challenge" 🏴‍☠️
 
-This is a project I made to enter the EY team. Thank you for review my work :)
+This is a project I made to enter the EY team. Thank you for checking my work :)
 
 ## Installation
 
